@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="foo bad on" id="test">
+        <h1>Hello World</h1>
+        <button id="btn">Click</button>
+        <button id="myBtn">Upload file</button>
+        <span class="error" style="display: none;">Please upload a valid extenstion file</span>
+    </div>
+    <div>
+        <img src="" id="myImg">
+    </div>
+    <script>
+        const element = document.getElementById("btn");
+        const element1 = document.getElementById("myBtn");
+        const imgelement = document.getElementById("myImg");
+        const error = document.getElementsByClassName("error");
+
+        element.addEventListener('click', () => {
+            const mydiv = document.getElementById("test");
+            mydiv.classList.toggle('on');
+            // if (mydiv.classList.contains("on")) {
+            //     mydiv.classList.replace('on', 'off');
+            // } else {
+            //     mydiv.classList.replace('off', 'on');
+            // }
+        });
+
+        element1.addEventListener('click', () => {
+            const reader = new FileReader();
+            const input = document.createElement('input');
+            input.type = "file";
+            input.onchange = (e) => {
+                reader.readAsDataURL(e.target.files[0]);
+            };
+            reader.onload = () => {
+                console.log(reader.result);
+                const datatype = reader.result.split(';')[0]
+                const supported_type = ["jpg", "png", "jpeg"];
+
+                // checks if extension is in the array
+                const has_ext = (value) => datatype.includes(value);
+                // console.log(supported_type.some(has_ext));
+                if (supported_type.some(has_ext)) {
+                    imgelement.src = reader.result;
+                    // console.log(imgelement);
+                } else {
+                    error[0].style.display = "block";
+                }
+            }
+            input.click();
+        });
+    </script>
+    <style>
+        .on {
+            background-color: red !important;
+        }
+        
+        .off {
+            background-color: green;
+        }
+        
+        .error {
+            color: red;
+        }
+        
+        .foo {
+            background-color: green;
+        }
+    </style>
+</body>
+
+</html>

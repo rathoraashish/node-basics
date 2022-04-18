@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- fetch('http://localhost:8081/listUsers').then((result)=> result.json() ).then((data)=>{ console.log(data) }).catch((e)=> { console.log(e) })  -->
+<!-- const result = await fetch('http://localhost:8081/listUsers'); const mydata = await result.json(); console.log(mydata); -->
+
+
+<body>
+    <script type="module">
+        const result = await fetch('http://localhost:8081/postUsers',{ method:'post', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify({name:"Tanuj"}) }); const mydata = await result.json(); console.log(mydata);
+    </script>
+</body>
+
+</html>
