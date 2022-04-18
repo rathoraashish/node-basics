@@ -4,5 +4,5 @@ const showPosts = async() => {
         const posts = await response.json();
         console.log(posts);
     }
-    //invoke function
+    //invoke function showPosts
 showPosts();
