@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<span id="message" style="display: none;"></span>
+<form action="">
+    <input type="number" name="user_id" id="user_id" placeholder="Enter unique id here">
+    <input type="text" name="user_nicename" id="user_nicename" placeholder="Enter new user name">
+    <input type="submit" name="submit" id="submit" value="Update">
+</form>
+<!-- fetch('http://localhost:8081/listUsers').then((result)=> result.json() ).then((data)=>{ console.log(data) }).catch((e)=> { console.log(e) })  -->
+<!-- const result = await fetch('http://localhost:8081/listUsers'); const mydata = await result.json(); console.log(mydata); -->
+
+
+<body>
+    <script type="module">
+        document.querySelector('form').addEventListener('submit', async(e) => {
+            e.preventDefault();
+            var formData = new FormData(e.target);
+            // let id = document.getElementById('user_id').value;
+            // let name = document.getElementById('user_nicename').value;
+            const result = await fetch('http://localhost:8081/getdata',
+                {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify({ id:formData.get('user_id'),name:formData.get('user_nicename') })
+                });
+            const mydata = await result.json();
+            console.log(mydata);
+        });
+
+    </script>
+</body>
+
+</html>

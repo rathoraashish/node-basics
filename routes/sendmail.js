@@ -1,4 +1,16 @@
 const nodemailer = require("nodemailer");
+const router = require('express').Router();
+
+router.get('/', (req, res) => {
+    res.send("mail sent")
+    sendGreetingMail();
+});
+router.post('/', (req, res) => {
+    const vv = req.body.message;
+    res.status(201).send(`Mail send post and message ${vv}`);
+    console.log(vv);
+    // sendGreetingMail();
+});
 
 function sendGreetingMail() {
     let mailTransporter = nodemailer.createTransport({
@@ -31,4 +43,4 @@ function sendGreetingMail() {
     });
 }
 
-sendGreetingMail();
+module.exports = router;
